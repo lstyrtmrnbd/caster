@@ -13,6 +13,7 @@ double Vec3dMath::length(sf::Vector3<double> &vec) {
   
 }
 
+//acts on vector
 void Vec3dMath::normalize(sf::Vector3<double> &vec) {
 
   double len = length(vec);
@@ -20,7 +21,6 @@ void Vec3dMath::normalize(sf::Vector3<double> &vec) {
   vec.x /= len;
   vec.y /= len;
   vec.z /= len;
-  
 }
 
 sf::Vector3<double> Vec3dMath::cross(sf::Vector3<double> &a,

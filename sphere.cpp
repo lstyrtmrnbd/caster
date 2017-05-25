@@ -16,7 +16,7 @@ IntersectionRecord * Sphere::intersect(Ray &ray) {
 }
 
 //somewhat more optimized, less sqrt
-//essentially transcribed from Sherrod
+//distance determination essentially transcribed from Sherrod
 IntersectionRecord * Sphere::intersectFast(Ray &ray) {
 
   sf::Vector3<double> rsVec = position - ray.origin;
@@ -36,18 +36,27 @@ IntersectionRecord * Sphere::intersectFast(Ray &ray) {
   if(intersectDistB < 0.0 || intersectDistB > radius2) {
     return nullptr;
   }
+
+  //distance to intersection
+  double distance = intersectDistA - sqrt(intersectDistB);
+
+  //normal determination
+  sf::Vector3<double> interPt = ray.origin + distance * ray.direction;
+  sf::Vector3<double> normal = interPt - position;
+  Vec3dMath::normalize(normal);
   
-  return new IntersectionRecord(intersectDistA - sqrt(intersectDistB));
+  return new IntersectionRecord(distance, normal);
 }
 
 
-//unoptimized but mathematically correct
+//unoptimized but mathematically correct distance calculation
+//i.e. does not fill normal field of intersectionrecord
 IntersectionRecord * Sphere::intersectWell(Ray &ray) {
 
   //vector between ray origin and sphere center
   sf::Vector3<double> L = position - ray.origin;
 
-  //cosine angle of a ray 't', in this case "ray"
+  //cosine angle of cast ray and origin to origin vector
   double tca = Vec3dMath::dot(L, ray.direction);
 
   if(tca < 0.0) return nullptr;
