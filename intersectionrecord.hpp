@@ -3,6 +3,7 @@
 
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
+#include "material.hpp"
 
 class IntersectionRecord {
 
@@ -13,7 +14,7 @@ public:
   sf::Vector3<double> normal;
 
   //material and lighting, filled by object.intersect
-  Material* mat;
+  Material* material;
   sf::Color color; //flat shading way, to be removed
 
   

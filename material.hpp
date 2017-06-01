@@ -10,8 +10,8 @@ public:
 
   sf::Color color;
 
-   //ambient coefficient for each RGB, 0 <= k <= 1
-  sf::Vector3<double> ambient;
+  //ambient reflection coefficient for each RGB, 0 <= k <= 1
+  sf::Vector3<double> ambk;
   
   Material();
   Material(sf::Color &color);
