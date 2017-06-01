@@ -12,8 +12,9 @@ public:
   double distance;
   sf::Vector3<double> normal;
 
-  //material and lighting, filled by caster.shade
-  sf::Color color;
+  //material and lighting, filled by object.intersect
+  Material* mat;
+  sf::Color color; //flat shading way, to be removed
 
   
   IntersectionRecord();

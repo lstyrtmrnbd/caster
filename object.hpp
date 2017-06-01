@@ -8,6 +8,11 @@
 #include "material.hpp"
 #include "intersectionrecord.hpp"
 
+/**
+ * An Object is a collection of surfaces that share a Material,
+ * it farms its intersection function out to its surfaces and
+ * returns the closest after adding a pointer to its Material for lighting calculations
+ */
 class Object {
 
   std::vector<Surface*> surfaces;

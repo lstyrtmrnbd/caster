@@ -49,7 +49,7 @@ IntersectionRecord * Sphere::intersectFast(Ray &ray) {
 }
 
 
-//unoptimized but mathematically correct distance calculation
+//unoptimized but mathematically correct distance calculation only
 //i.e. does not fill normal field of intersectionrecord
 IntersectionRecord * Sphere::intersectWell(Ray &ray) {
 
