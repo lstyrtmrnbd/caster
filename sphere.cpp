@@ -45,12 +45,12 @@ IntersectionRecord * Sphere::intersectFast(Ray &ray) {
   sf::Vector3<double> normal = interPt - position;
   Vec3dMath::normalize(normal);
   
-  return new IntersectionRecord(distance, normal);
+  return new IntersectionRecord(distance, interPt, normal);
 }
 
 
 //unoptimized but mathematically correct distance calculation only
-//i.e. does not fill normal field of intersectionrecord
+//i.e. only fills distance field of intersectionrecord
 IntersectionRecord * Sphere::intersectWell(Ray &ray) {
 
   //vector between ray origin and sphere center

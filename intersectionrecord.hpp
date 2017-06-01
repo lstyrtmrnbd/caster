@@ -11,6 +11,7 @@ public:
 
   //ray tracing, filled by surface.intersect
   double distance;
+  sf::Vector3<double> interpt; //intersection point
   sf::Vector3<double> normal;
 
   //material and lighting, filled by object.intersect
@@ -21,7 +22,7 @@ public:
   IntersectionRecord();
   IntersectionRecord(double dist);
   IntersectionRecord(double dist, sf::Vector3<double> norm);
-  
+  IntersectionRecord(double dist, sf::Vector3<double> inter, sf::Vector3<double> norm);
   
 };
 

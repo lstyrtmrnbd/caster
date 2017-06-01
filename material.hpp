@@ -8,10 +8,14 @@ class Material {
 
 public:
 
+  //for flat shading
   sf::Color color;
 
   //ambient reflection coefficient for each RGB, 0 <= k <= 1
   sf::Vector3<double> ambk;
+
+  //diffuse reflection coefficient for each RGB, 0 <= k <= 1
+  sf::Vector3<double> diffk;
   
   Material();
   Material(sf::Color &color);

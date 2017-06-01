@@ -24,5 +24,7 @@ IntersectionRecord * Plane::intersect(Ray &ray) {
 
   if(distance < 0.0) return nullptr;
 
-  return new IntersectionRecord(distance);
+  sf::Vector3<double> interPt = ray.origin + distance * ray.direction;
+
+  return new IntersectionRecord(distance, interPt, normal);
 }
