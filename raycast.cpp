@@ -100,9 +100,9 @@ std::vector<sf::Uint8> * RayCast::shade() {
 
   int totalColor = 0;
   
-  //size_t colorCount = intersections.size() * 4;
-  std::vector<sf::Uint8> *colorBuffer = new std::vector<sf::Uint8>(); 
+  std::vector<sf::Uint8>* colorBuffer = new std::vector<sf::Uint8>(); 
 
+  //IntersectionRecord** it
   for(auto it = intersections.begin(); it != intersections.end(); it++) {
     if((*it) == nullptr) {
 
@@ -119,10 +119,11 @@ std::vector<sf::Uint8> * RayCast::shade() {
       colorBuffer->push_back(col.b);
       colorBuffer->push_back(col.a);
 
+      //flat shading ^^^^
+      //construct color by iterating through light contributions here
+      
       //EC
-      //std::cout << "Non-default color pushed to colorBuffer\n";
       totalColor++;
-      //EC
     }
   }
 

@@ -40,7 +40,7 @@ IntersectionRecord * Sphere::intersectFast(Ray &ray) {
   //distance to intersection
   double distance = intersectDistA - sqrt(intersectDistB);
 
-  //normal determination
+  //intersection location and normal determination
   sf::Vector3<double> interPt = ray.origin + distance * ray.direction;
   sf::Vector3<double> normal = interPt - position;
   Vec3dMath::normalize(normal);
