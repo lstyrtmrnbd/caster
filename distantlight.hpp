@@ -1,6 +1,8 @@
 #ifndef DISTANTLIGHT_HPP
 #define DISTANTLIGHT_HPP
 
+#include <cmath> //fmax() in contribute
+
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
 

@@ -32,15 +32,19 @@ int main() {
   sf::Vector3<double> green(0.0, 1.0, 0.0);
   sf::Vector3<double> blue(0.0, 0.0, 1.0);
   sf::Vector3<double> grey(0.5, 0.5, 0.5);
+
+  sf::Vector3<double> fullDiff(1,1,1);
+  sf::Vector3<double> medDiff(0.5, 0.5, 0.5);
+  sf::Vector3<double> noDiff(0,0,0);
   
-  Material redMat(red);
-  Material greenMat(green);
-  Material blueMat(blue);
-  Material greyMat(grey);
+  Material redMat(red, medDiff);
+  Material greenMat(green, medDiff);
+  Material blueMat(blue, medDiff);
+  Material greyMat(grey, noDiff);
   
-  Sphere leftSphere(sf::Vector3<double>(-256, 0, 0), 256.0);
-  Sphere rightSphere(sf::Vector3<double>(256, 0, 0), 256.0);
-  Sphere centerSphere(sf::Vector3<double>(0, 0, 0), 256.0);
+  Sphere leftSphere(sf::Vector3<double>(-256, 0, 0), 128.0);
+  Sphere rightSphere(sf::Vector3<double>(256, 0, 0), 128.0);
+  Sphere centerSphere(sf::Vector3<double>(0, 0, 0), 128.0);
   Plane basePlane(sf::Vector3<double>(0, 256, 0), sf::Vector3<double>(0, 1, .1));
   
   std::vector<Surface*> leftSurfaces(1, &leftSphere);
@@ -49,8 +53,8 @@ int main() {
   std::vector<Surface*> baseSurfaces(1, &basePlane);
   
   Object redSphere(leftSurfaces, &redMat);
-  Object greenSphere(rightSurfaces, &greenMat);
-  Object blueSphere(centerSurfaces, &blueMat);
+  Object greenSphere(centerSurfaces, &greenMat);
+  Object blueSphere(rightSurfaces, &blueMat);
   Object greyPlane(baseSurfaces, &greyMat);
 
   std::vector<Object*> objList {&redSphere, &greenSphere, &blueSphere, &greyPlane};
@@ -59,9 +63,10 @@ int main() {
   caster->castRays(objList);
 
   //prepare light list
-  AmbientLight ambient(sf::Vector3<double>(1.0, 1.0, 1.0));
-
-  std::vector<Light*> lightList { &ambient };
+  AmbientLight ambient(sf::Vector3<double>(0.25, 0.25, 0.25));
+  DistantLight distant(sf::Vector3<double>(0.5, 0.5, 0.5), sf::Vector3<double>(0, 0.75, 0.25));
+  
+  std::vector<Light*> lightList { &ambient, &distant };
 
   //perform shading
   std::vector<sf::Uint8> *colorBuffer = caster->shade(lightList);

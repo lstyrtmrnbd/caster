@@ -11,7 +11,9 @@ DistantLight::DistantLight(sf::Vector3<double> iRGB, sf::Vector3<double> dir) {
 
 sf::Color DistantLight::contribute(IntersectionRecord* record) {
 
-  double factor = Vec3dMath::dot(record->normal, direction);
+  //Lambert's cosine law, with direction from point to light being -light.direction
+  sf::Vector3<double> toLight = direction * -1.0;
+  double factor = fmax(0.0, Vec3dMath::dot(record->normal, toLight));
 
   int red   = (int)(255 * factor * record->material->diffk.x * intensity.x);
   int green = (int)(255 * factor * record->material->diffk.y * intensity.y);
