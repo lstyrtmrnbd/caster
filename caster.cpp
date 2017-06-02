@@ -8,6 +8,9 @@
 #include "sphere.hpp"
 #include "plane.hpp"
 #include "object.hpp"
+#include "light.hpp"
+#include "ambientlight.hpp"
+#include "distantlight.hpp"
 
 const unsigned int width = 1280;
 const unsigned int height = 720;
@@ -25,11 +28,11 @@ int main() {
   RayCast* caster = new RayCast(width, height, origin, viewLoc);
 
   //prepare object list
-  sf::Color red(255,0,0);
-  sf::Color green(0,255,0);
-  sf::Color blue(0,0,255);
-  sf::Color grey(128,128,128);
-
+  sf::Vector3<double> red(1.0, 0.0, 0.0);
+  sf::Vector3<double> green(0.0, 1.0, 0.0);
+  sf::Vector3<double> blue(0.0, 0.0, 1.0);
+  sf::Vector3<double> grey(0.5, 0.5, 0.5);
+  
   Material redMat(red);
   Material greenMat(green);
   Material blueMat(blue);
@@ -52,10 +55,16 @@ int main() {
 
   std::vector<Object*> objList {&redSphere, &greenSphere, &blueSphere, &greyPlane};
   
-  //perform casting and shading
+  //perform casting
   caster->castRays(objList);
-  
-  std::vector<sf::Uint8> *colorBuffer = caster->shade();
+
+  //prepare light list
+  AmbientLight ambient(sf::Vector3<double>(1.0, 1.0, 1.0));
+
+  std::vector<Light*> lightList { &ambient };
+
+  //perform shading
+  std::vector<sf::Uint8> *colorBuffer = caster->shade(lightList);
 
   sf::Uint8 *pixels = colorBuffer->data();
 

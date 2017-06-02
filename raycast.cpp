@@ -94,7 +94,7 @@ void RayCast::castRays(std::vector<Object*> &objList) {
   
 }
 
-std::vector<sf::Uint8> * RayCast::shade() {
+std::vector<sf::Uint8> * RayCast::shade(std::vector<Light*> &lightList) {
 
   //return pointer to buffer
 
@@ -104,6 +104,7 @@ std::vector<sf::Uint8> * RayCast::shade() {
 
   //IntersectionRecord** it
   for(auto it = intersections.begin(); it != intersections.end(); it++) {
+
     if((*it) == nullptr) {
 
       colorBuffer->push_back(defaultColor.r);
@@ -112,8 +113,16 @@ std::vector<sf::Uint8> * RayCast::shade() {
       colorBuffer->push_back(defaultColor.a);
     } else {
 
-      sf::Color col = (*it)->color;
+      //sf::Color col = (*it)->color; //flat shading
 
+      sf::Color col(0,0,0);
+
+      //Light** lit
+      for(auto lit = lightList.begin(); lit != lightList.end(); lit++) {
+ 
+	col += (*lit)->contribute(*it);
+      }
+      
       colorBuffer->push_back(col.r);
       colorBuffer->push_back(col.g);
       colorBuffer->push_back(col.b);

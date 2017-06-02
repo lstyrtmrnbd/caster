@@ -19,6 +19,8 @@ public:
   
   Material();
   Material(sf::Color &color);
+  Material(sf::Vector3<double> ambientK);
+  Material(sf::Vector3<double> ambientK, sf::Vector3<double> diffuseK);
   
 };
 

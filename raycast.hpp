@@ -13,6 +13,8 @@
 #include "ray.hpp"
 #include "object.hpp"
 #include "intersectionrecord.hpp"
+#include "light.hpp"
+
 
 class RayCast {
 
@@ -49,7 +51,7 @@ public:
    *   [average the RGB data by rays per pixel]
    *   "as3.pdf" 1.Raytracing -Anti-aliasing
    */
-  std::vector<sf::Uint8> * shade(); 
+  std::vector<sf::Uint8> * shade(std::vector<Light*> &lightList); 
 };
 
 #endif
