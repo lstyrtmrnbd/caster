@@ -1,5 +1,5 @@
-#ifndef AMBIENTLIGHT_HPP
-#define AMBIENTLIGHT_HPP
+#ifndef DISTANTLIGHT_HPP
+#define DISTANTLIGHT_HPP
 
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
@@ -8,15 +8,16 @@
 #include "intersectionrecord.hpp"
 #include "vec3dmath.hpp"
 
-class AmbientLight : public Light {
+class DistantLight : public Light {
 
 public:
 
   sf::Vector3<double> intensity; //clamp 0.0 - 1.0
+  sf::Vector3<double> direction; //normalize
   
   sf::Color contribute(IntersectionRecord* record);
 
-  AmbientLight(sf::Vector3<double> iRGB);
+  DistantLight(sf::Vector3<double> iRGB, sf::Vector3<double> dir);
 };
 
 #endif
