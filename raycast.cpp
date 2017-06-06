@@ -113,13 +113,14 @@ std::vector<sf::Uint8> * RayCast::shade(std::vector<Light*> &lightList) {
       colorBuffer->push_back(defaultColor.a);
     } else {
 
-      //sf::Color col = (*it)->color; //flat shading
-
+      //the pushed color is built by adding light contributions
       sf::Color col(0,0,0);
 
       //Light** lit
       for(auto lit = lightList.begin(); lit != lightList.end(); lit++) {
- 
+
+	//iterate through objects with intersection to light ray
+	//and break on intersect for shadows
 	col += (*lit)->contribute(*it);
       }
       
@@ -127,9 +128,6 @@ std::vector<sf::Uint8> * RayCast::shade(std::vector<Light*> &lightList) {
       colorBuffer->push_back(col.g);
       colorBuffer->push_back(col.b);
       colorBuffer->push_back(col.a);
-
-      //flat shading ^^^^
-      //construct color by iterating through light contributions here
       
       //EC
       totalColor++;

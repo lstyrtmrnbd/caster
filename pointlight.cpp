@@ -13,7 +13,7 @@ sf::Color PointLight::contribute(IntersectionRecord* record) {
   //there's was a sqrt here that could be factored out
   double distance2 = Vec3dMath::dot(fromLight, fromLight);
   
-  sf::Vector3<double> attenuation = intensity / distance2;
+  sf::Vector3<double> attenuation = intensity / (distance2 + epsilon);
 
   Vec3dMath::normalize(fromLight);
 

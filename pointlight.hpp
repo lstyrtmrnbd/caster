@@ -12,6 +12,8 @@ class PointLight : public Light {
 
 public:
 
+  //used to decrease distance attenuation in contribute()
+  const double epsilon = .75;
   //p0
   sf::Vector3<double> position;
   //I at p0, this is not clamped and for decent results should be a large value 

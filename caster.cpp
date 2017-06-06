@@ -70,9 +70,10 @@ int main() {
   //prepare light list
   AmbientLight ambient(sf::Vector3<double>(0.25, 0.25, 0.25));
   DistantLight distant(sf::Vector3<double>(0.5, 0.5, 0.5), sf::Vector3<double>(0, 0.75, 0.25));
-  PointLight point(sf::Vector3<double>(5120,5120,5120), sf::Vector3<double>(0, 132, -128));
+  PointLight point(sf::Vector3<double>(5120,5120,5120), sf::Vector3<double>(-128, 132, -128));
+  PointLight point2(sf::Vector3<double>(10240,10240,10240), sf::Vector3<double>(128, 132, -128));
   
-  std::vector<Light*> lightList { &ambient, &distant, &point };
+  std::vector<Light*> lightList { &ambient, &distant, &point, &point2 };
 
   //perform shading
   std::vector<sf::Uint8> *colorBuffer = caster->shade(lightList);
