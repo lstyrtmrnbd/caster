@@ -11,6 +11,7 @@
 #include "light.hpp"
 #include "ambientlight.hpp"
 #include "distantlight.hpp"
+#include "pointlight.hpp"
 
 const unsigned int width = 1280;
 const unsigned int height = 720;
@@ -37,10 +38,14 @@ int main() {
   sf::Vector3<double> medDiff(0.5, 0.5, 0.5);
   sf::Vector3<double> noDiff(0,0,0);
   
+  sf::Vector3<double> redDiff(1,0,0);
+  sf::Vector3<double> greenDiff(0,1,0);
+  sf::Vector3<double> blueDiff(0,0,1);
+  
   Material redMat(red, medDiff);
   Material greenMat(green, medDiff);
   Material blueMat(blue, medDiff);
-  Material greyMat(grey, noDiff);
+  Material greyMat(grey, medDiff);
   
   Sphere leftSphere(sf::Vector3<double>(-256, 0, 0), 128.0);
   Sphere rightSphere(sf::Vector3<double>(256, 0, 0), 128.0);
@@ -65,8 +70,9 @@ int main() {
   //prepare light list
   AmbientLight ambient(sf::Vector3<double>(0.25, 0.25, 0.25));
   DistantLight distant(sf::Vector3<double>(0.5, 0.5, 0.5), sf::Vector3<double>(0, 0.75, 0.25));
+  PointLight point(sf::Vector3<double>(256,256,256), sf::Vector3<double>(256, 386, -128));
   
-  std::vector<Light*> lightList { &ambient, &distant };
+  std::vector<Light*> lightList { &ambient, &distant, &point };
 
   //perform shading
   std::vector<sf::Uint8> *colorBuffer = caster->shade(lightList);
