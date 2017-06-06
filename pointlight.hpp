@@ -12,9 +12,11 @@ class PointLight : public Light {
 
 public:
 
-  sf::Vector3<double> position;  //p0
-  sf::Vector3<double> intensity; //I at p0
-
+  //p0
+  sf::Vector3<double> position;
+  //I at p0, this is not clamped and for decent results should be a large value 
+  sf::Vector3<double> intensity;
+  
   sf::Color contribute(IntersectionRecord* record);
 
   PointLight(sf::Vector3<double> iRGB, sf::Vector3<double> pos);

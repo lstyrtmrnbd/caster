@@ -70,7 +70,7 @@ int main() {
   //prepare light list
   AmbientLight ambient(sf::Vector3<double>(0.25, 0.25, 0.25));
   DistantLight distant(sf::Vector3<double>(0.5, 0.5, 0.5), sf::Vector3<double>(0, 0.75, 0.25));
-  PointLight point(sf::Vector3<double>(256,256,256), sf::Vector3<double>(256, 386, -128));
+  PointLight point(sf::Vector3<double>(5120,5120,5120), sf::Vector3<double>(0, 132, -128));
   
   std::vector<Light*> lightList { &ambient, &distant, &point };
 
