@@ -45,7 +45,7 @@ IntersectionRecord * Sphere::intersectFast(Ray &ray) {
   sf::Vector3<double> normal = interPt - position;
   Vec3dMath::normalize(normal);
   
-  return new IntersectionRecord(distance, interPt, normal);
+  return new IntersectionRecord(distance, interPt, normal, ray.direction);
 }
 
 

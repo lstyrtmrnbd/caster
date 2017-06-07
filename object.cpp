@@ -28,7 +28,6 @@ IntersectionRecord * Object::intersect(Ray &ray) {
   }
 
   if(closest != nullptr) {
-    closest->color = material->color; //flat shading way, to be removed
     closest->material = material;     //new lighting way
   }
   

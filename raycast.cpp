@@ -119,8 +119,8 @@ std::vector<sf::Uint8> * RayCast::shade(std::vector<Light*> &lightList) {
       //Light** lit
       for(auto lit = lightList.begin(); lit != lightList.end(); lit++) {
 
-	//iterate through objects with intersection to light ray
-	//and break on intersect for shadows
+	//iterate through objects with interpt-to-light ray
+	//and break on intersect for shadows, else add light contribution
 	col += (*lit)->contribute(*it);
       }
       

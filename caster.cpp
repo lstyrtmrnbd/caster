@@ -29,23 +29,18 @@ int main() {
   RayCast* caster = new RayCast(width, height, origin, viewLoc);
 
   //prepare object list
-  sf::Vector3<double> red(1.0, 0.0, 0.0);
-  sf::Vector3<double> green(0.0, 1.0, 0.0);
-  sf::Vector3<double> blue(0.0, 0.0, 1.0);
+  sf::Vector3<double> white(1,1,1);
   sf::Vector3<double> grey(0.5, 0.5, 0.5);
-
-  sf::Vector3<double> fullDiff(1,1,1);
-  sf::Vector3<double> medDiff(0.5, 0.5, 0.5);
-  sf::Vector3<double> noDiff(0,0,0);
+  sf::Vector3<double> black(0,0,0);
   
-  sf::Vector3<double> redDiff(1,0,0);
-  sf::Vector3<double> greenDiff(0,1,0);
-  sf::Vector3<double> blueDiff(0,0,1);
+  sf::Vector3<double> red(1,0,0);
+  sf::Vector3<double> green(0,1,0);
+  sf::Vector3<double> blue(0,0,1);
   
-  Material redMat(red, medDiff);
-  Material greenMat(green, medDiff);
-  Material blueMat(blue, medDiff);
-  Material greyMat(grey, medDiff);
+  Material redMat(red, grey);
+  Material greenMat(green, grey, grey, 4);
+  Material blueMat(blue, grey, white, 8);
+  Material greyMat(grey, white);
   
   Sphere leftSphere(sf::Vector3<double>(-256, 0, 0), 128.0);
   Sphere rightSphere(sf::Vector3<double>(256, 0, 0), 128.0);

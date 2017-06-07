@@ -14,7 +14,7 @@ IntersectionRecord::IntersectionRecord(double dist, sf::Vector3<double> norm) :
 }
 
 IntersectionRecord::IntersectionRecord(double dist, sf::Vector3<double> inter,
-				       sf::Vector3<double> norm) :
-  distance(dist), interpt(inter), normal(norm) {
+				       sf::Vector3<double> norm, sf::Vector3<double> direction) :
+  distance(dist), interpt(inter), normal(norm), fromViewer(direction) {
 
 }
