@@ -1,3 +1,18 @@
+CC = g++
 
-caster: *.cpp
-	g++ -ggdb -Wall -Wextra caster.cpp raycast.cpp vec3dmath.cpp ray.cpp object.cpp material.cpp sphere.cpp plane.cpp intersectionrecord.cpp ambientlight.cpp distantlight.cpp pointlight.cpp -o caster.bin -lsfml-system -lsfml-window -lsfml-graphics
+DEVCFLAGS =  -ggdb -Wall -Wextra -Werror -Wpedantic
+
+LDFLAGS = -lsfml-graphics -lsfml-window -lsfml-system
+
+TARGET = caster
+
+SOURCES = $(wildcard *.cpp)
+
+OBJ = $(SOURCES:.cpp=.o)
+
+$(TARGET): $(OBJ)
+
+	$(CC) $(DEVCFLAGS) -o $@.bin $(LDFLAGS)
+
+clean:
+	rm $(OBJ)
