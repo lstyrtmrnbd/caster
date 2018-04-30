@@ -12,7 +12,7 @@ OBJ = $(SOURCES:.cpp=.o)
 
 $(TARGET): $(OBJ)
 
-	$(CC) $(DEVCFLAGS) -o $@.bin $(LDFLAGS)
+	$(CC) $(DEVCFLAGS) -o $@.exe $^ $(LDFLAGS)
 
 clean:
 	rm $(OBJ)
