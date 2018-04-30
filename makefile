@@ -6,7 +6,7 @@ LDFLAGS = -lsfml-graphics -lsfml-window -lsfml-system
 
 TARGET = caster
 
-SOURCES = $(wildcard *.cpp)
+SOURCES = $(wildcard src/*.cpp)
 
 OBJ = $(SOURCES:.cpp=.o)
 
