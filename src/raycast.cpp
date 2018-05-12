@@ -93,6 +93,33 @@ void RayCast::castRays(std::vector<Object*> &objList) {
   
 }
 
+IntersectionRecord* RayCast::castRay(sf::vector3<double> rayDir, std::vector<Object*> &objList) {
+
+  std::vector<IntersectionRecord*> shortList;
+
+  for(auto it = objList.begin(); it != objList.end(); it++) {
+
+    IntersectionRecord* inter = (*it)->intersect(castRay);
+
+    shortList.push_back(inter);
+  }
+
+  IntersectionRecord* closest = nullptr;
+
+  for(auto it = shortList.begin(); it != shortList.end(); it++) {
+
+    if((*it) != nullptr &&
+       (closest == nullptr || (*it)->distance < closest->distance)) {
+
+      closest = (*it);
+    }
+  }
+
+  // KILL SHORTLIST RECORDS BUT NOT closest
+
+  return closest;
+}
+
 std::vector<sf::Uint8> * RayCast::shade(std::vector<Light*> &lightList) {
 
   // return pointer to buffer
