@@ -16,12 +16,12 @@ public:
   Sphere();
   Sphere(sf::Vector3<double> pos, double rad);
 
-  IntersectionRecord * intersect(Ray&);
+  IntersectionRecord* intersect(Ray&);
 
 private:
 
-  IntersectionRecord * intersectFast(Ray&);
-  IntersectionRecord * intersectWell(Ray&);
+  IntersectionRecord* intersectFast(Ray&);
+  IntersectionRecord* intersectWell(Ray&);
   
 };
 

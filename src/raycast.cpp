@@ -10,7 +10,7 @@ RayCast::RayCast() {
 }
 
 RayCast::RayCast(int width, int height, sf::Vector3<double> pos,
-		 sf::Vector3<double> screenPos) :
+                 sf::Vector3<double> screenPos) :
                  screenWidth(width), screenHeight(height),
                  position(pos), screenPosition(screenPos) {
 
@@ -19,8 +19,8 @@ RayCast::RayCast(int width, int height, sf::Vector3<double> pos,
 
   //EC
   std::cout << "Caster initialized with "
-	    << width << " width, " << height << " height\n"
-	    << "\tat position " << pos.x << ", " << pos.y << ", " << pos.z << "\n";
+            << width << " width, " << height << " height\n"
+            << "\tat position " << pos.x << ", " << pos.y << ", " << pos.z << "\n";
 }
 
 RayCast::~RayCast() {
@@ -53,33 +53,32 @@ void RayCast::castRays(std::vector<Object*> &objList) {
       
       castRay.direction = dir;
 
-      //list Object intersections per castRay
-      //if nullptr -> no object hit, put nullptr in long list
-      //if not -> some hit, compare distance and put closest
+      // list Object intersections per castRay
+      // if nullptr -> no object hit, put nullptr in long list
+      // if not -> some hit, compare distance and put closest
 
       std::vector<IntersectionRecord*> shortList;
 
       for(auto it = objList.begin(); it != objList.end(); it++) {
 
-	IntersectionRecord* inter = (*it)->intersect(castRay);
-	
-	shortList.push_back(inter);
+        IntersectionRecord* inter = (*it)->intersect(castRay);
+        
+        shortList.push_back(inter);
       }
 
       IntersectionRecord* closest = nullptr;
 
       for(auto it = shortList.begin(); it != shortList.end(); it++) {
 
-	if((*it) != nullptr &&
-	   (closest == nullptr ||
-	    (*it)->distance < closest->distance)) {
+        if((*it) != nullptr &&
+           (closest == nullptr || (*it)->distance < closest->distance)) {
 
-	  closest = (*it);
-	}
+          closest = (*it);
+        }
       }
 
-      //!!KILL THE OLD INTERSECTION RECORDS!!
-      //closest is now the final intersection verdict for castRay
+      // !!KILL THE OLD INTERSECTION RECORDS!!
+      // closest is now the final intersection verdict for castRay
  
       intersections.push_back(closest);
 
@@ -90,19 +89,18 @@ void RayCast::castRays(std::vector<Object*> &objList) {
 
   //EC
   std::cout << "Caster filled intersection records list, contains "
-	    << totalHits << " total hits" << "\n";
+            << totalHits << " total hits" << "\n";
   
 }
 
 std::vector<sf::Uint8> * RayCast::shade(std::vector<Light*> &lightList) {
 
-  //return pointer to buffer
+  // return pointer to buffer
 
   int totalColor = 0;
   
   std::vector<sf::Uint8>* colorBuffer = new std::vector<sf::Uint8>(); 
 
-  //IntersectionRecord** it
   for(auto it = intersections.begin(); it != intersections.end(); it++) {
 
     if((*it) == nullptr) {
@@ -113,15 +111,14 @@ std::vector<sf::Uint8> * RayCast::shade(std::vector<Light*> &lightList) {
       colorBuffer->push_back(defaultColor.a);
     } else {
 
-      //the pushed color is built by adding light contributions
+      // the pushed color is built by adding light contributions
       sf::Color col(0,0,0);
 
-      //Light** lit
       for(auto lit = lightList.begin(); lit != lightList.end(); lit++) {
 
-	//iterate through objects with interpt-to-light ray
-	//and break on intersect for shadows, else add light contribution
-	col += (*lit)->contribute(*it);
+        // iterate through objects with interpt-to-light ray
+        // and break on intersect for shadows, else add light contribution
+        col += (*lit)->contribute(*it);
       }
       
       colorBuffer->push_back(col.r);

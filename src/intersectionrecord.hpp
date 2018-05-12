@@ -9,20 +9,20 @@ class IntersectionRecord {
 
 public:
 
-  //ray tracing, filled by surface.intersect
+  // ray tracing, filled by surface.intersect
   double distance;
-  sf::Vector3<double> interpt; //intersection point
+  sf::Vector3<double> interpt;    // intersection point
   sf::Vector3<double> normal;
-  sf::Vector3<double> fromViewer; //ray.direction, for spec reflection
+  sf::Vector3<double> fromViewer; // ray.direction, for spec reflection
   
-  //material and lighting, filled by object.intersect
+  // material and lighting, filled by object.intersect
   Material* material;
   
   IntersectionRecord();
   IntersectionRecord(double dist);
   IntersectionRecord(double dist, sf::Vector3<double> norm);
   IntersectionRecord(double dist, sf::Vector3<double> inter,
-		     sf::Vector3<double> norm, sf::Vector3<double> direction);
+                     sf::Vector3<double> norm, sf::Vector3<double> direction);
   
 };
 

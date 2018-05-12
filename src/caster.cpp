@@ -28,7 +28,7 @@ int main() {
   
   RayCast* caster = new RayCast(width, height, origin, viewLoc);
 
-  //prepare object list
+  // prepare object list
   sf::Vector3<double> white(1,1,1);
   sf::Vector3<double> grey(0.5, 0.5, 0.5);
   sf::Vector3<double> black(0,0,0);
@@ -59,10 +59,10 @@ int main() {
 
   std::vector<Object*> objList {&redSphere, &greenSphere, &blueSphere, &greyPlane};
   
-  //perform casting
+  // perform casting
   caster->castRays(objList);
 
-  //prepare light list
+  // prepare light list
   AmbientLight ambient(sf::Vector3<double>(0.25, 0.25, 0.25));
   DistantLight distant(sf::Vector3<double>(0.5, 0.5, 0.5), sf::Vector3<double>(0, 0.75, 0.25));
   PointLight point(sf::Vector3<double>(5120,5120,5120), sf::Vector3<double>(-128, 132, -128));
@@ -70,12 +70,12 @@ int main() {
   
   std::vector<Light*> lightList { &ambient, &distant, &point, &point2 };
 
-  //perform shading
+  // perform shading
   std::vector<sf::Uint8> *colorBuffer = caster->shade(lightList);
 
   sf::Uint8 *pixels = colorBuffer->data();
 
-  //prepare drawing
+  // prepare drawing
   sf::Texture texture;
   if(!texture.create(width, height)) {
 

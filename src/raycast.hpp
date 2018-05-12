@@ -18,12 +18,13 @@
 
 class RayCast {
 
-  //"screen" is the viewing screen the rays are cast through
-  // its relationship to the actual rendering window is in shade()
+  // "screen" is the viewing screen the rays are cast through
+  //  its relationship to the actual rendering window is in shade()
   int screenWidth;
   int screenHeight;
 
   sf::Vector3<double> position;
+  // distance between these two is the focal length
   sf::Vector3<double> screenPosition;
   //sf::Vector3<double> up;
   //sf::Vector3<double> right;
