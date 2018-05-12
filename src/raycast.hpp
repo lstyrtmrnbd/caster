@@ -47,7 +47,7 @@ public:
   void castRays(std::vector<Object*> &objList);
 
   // cast single ray at normalized rayDir across list of objects
-  IntersectionRecord* castRay(sf::Vector3<double> rayDir, std::vector<Object*> &objList);
+  IntersectionRecord* castRay(Ray &ray, std::vector<Object*> &objList);
   
   /**
    * shade() parses the intersection records into color data

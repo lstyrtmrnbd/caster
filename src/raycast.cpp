@@ -34,8 +34,8 @@ void RayCast::castRays(std::vector<Object*> &objList) {
 
   int totalHits = 0; //EC
 
-  Ray castRay;
-  castRay.origin = position;
+  Ray castMe;
+  castMe.origin = position;
 
   double depth = position.z - screenPosition.z;
   
@@ -47,59 +47,35 @@ void RayCast::castRays(std::vector<Object*> &objList) {
 
       dir.x = x - (double)(screenWidth / 2.0);
       dir.y = y - (double)(screenHeight / 2.0);
-      dir.z = depth * -1; //don't cast backwards
+      dir.z = depth * -1; // don't cast backwards
       
-      Vec3dMath::normalize(dir);
-      
-      castRay.direction = dir;
+      Vec3dMath::normalize(dir);    
+      castMe.direction = dir;
 
-      // list Object intersections per castRay
-      // if nullptr -> no object hit, put nullptr in long list
-      // if not -> some hit, compare distance and put closest
-
-      std::vector<IntersectionRecord*> shortList;
-
-      for(auto it = objList.begin(); it != objList.end(); it++) {
-
-        IntersectionRecord* inter = (*it)->intersect(castRay);
-        
-        shortList.push_back(inter);
-      }
-
-      IntersectionRecord* closest = nullptr;
-
-      for(auto it = shortList.begin(); it != shortList.end(); it++) {
-
-        if((*it) != nullptr &&
-           (closest == nullptr || (*it)->distance < closest->distance)) {
-
-          closest = (*it);
-        }
-      }
-
-      // !!KILL THE OLD INTERSECTION RECORDS!!
-      // closest is now the final intersection verdict for castRay
- 
+      // the record this points to is constructed by Object.intersect() and can be null
+      IntersectionRecord* closest = castRay(castMe, objList);
       intersections.push_back(closest);
 
-      //EC
-      if(closest != nullptr) { totalHits++; }
+      if(closest != nullptr) { totalHits++; } // EC
     }
   }
 
-  //EC
   std::cout << "Caster filled intersection records list, contains "
-            << totalHits << " total hits" << "\n";
+            << totalHits << " total hits" << "\n"; // EC
   
 }
 
-IntersectionRecord* RayCast::castRay(sf::vector3<double> rayDir, std::vector<Object*> &objList) {
+IntersectionRecord* RayCast::castRay(Ray &ray, std::vector<Object*> &objList) {
+
+  // list Object intersections per castRay
+  // if nullptr -> no object hit, return nullptr in closest for long list
+  // if not -> some hit, compare distance and return in closest
 
   std::vector<IntersectionRecord*> shortList;
 
   for(auto it = objList.begin(); it != objList.end(); it++) {
 
-    IntersectionRecord* inter = (*it)->intersect(castRay);
+    IntersectionRecord* inter = (*it)->intersect(ray);
 
     shortList.push_back(inter);
   }
@@ -108,13 +84,13 @@ IntersectionRecord* RayCast::castRay(sf::vector3<double> rayDir, std::vector<Obj
 
   for(auto it = shortList.begin(); it != shortList.end(); it++) {
 
-    if((*it) != nullptr &&
-       (closest == nullptr || (*it)->distance < closest->distance)) {
+    IntersectionRecord* current = *it;
 
-      closest = (*it);
-    }
+    if(current != nullptr)
+      if(closest == nullptr || current->distance < closest->distance)
+        closest = current;
   }
-
+        
   // KILL SHORTLIST RECORDS BUT NOT closest
 
   return closest;
