@@ -10,14 +10,14 @@ Sphere::Sphere(sf::Vector3<double> pos, double rad) :
 }
 
 
-IntersectionRecord * Sphere::intersect(Ray &ray) {
+IntersectionRecord* Sphere::intersect(Ray &ray) {
 
   return intersectFast(ray);
 }
 
 //somewhat more optimized, less sqrt
 //distance determination essentially transcribed from Sherrod
-IntersectionRecord * Sphere::intersectFast(Ray &ray) {
+IntersectionRecord* Sphere::intersectFast(Ray &ray) {
 
   sf::Vector3<double> rsVec = position - ray.origin;
 
@@ -51,7 +51,7 @@ IntersectionRecord * Sphere::intersectFast(Ray &ray) {
 
 //unoptimized but mathematically correct distance calculation only
 //i.e. only fills distance field of intersectionrecord
-IntersectionRecord * Sphere::intersectWell(Ray &ray) {
+IntersectionRecord* Sphere::intersectWell(Ray &ray) {
 
   //vector between ray origin and sphere center
   sf::Vector3<double> L = position - ray.origin;

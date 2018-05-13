@@ -1,8 +1,6 @@
 #include "raycast.hpp"
 
-/**
- *  //EC: used for error checking
- */
+// EC: used for error checking
 
 RayCast::RayCast() {
 
@@ -17,22 +15,21 @@ RayCast::RayCast(int width, int height, sf::Vector3<double> pos,
   const std::size_t interCt = width * height;
   std::vector<IntersectionRecord*> intersections(interCt);
 
-  //EC
   std::cout << "Caster initialized with "
             << width << " width, " << height << " height\n"
-            << "\tat position " << pos.x << ", " << pos.y << ", " << pos.z << "\n";
+            << "\tat position " << pos.x << ", " << pos.y << ", " << pos.z << "\n"; // EC
 }
 
 RayCast::~RayCast() {
 
-  //clean up the following:
+  // clean up the following:
   //  intersections
 
 }
 
 void RayCast::castRays(std::vector<Object*> &objList) {
 
-  int totalHits = 0; //EC
+  int totalHits = 0; // EC
 
   Ray castMe;
   castMe.origin = position;
@@ -96,9 +93,7 @@ IntersectionRecord* RayCast::castRay(Ray &ray, std::vector<Object*> &objList) {
   return closest;
 }
 
-std::vector<sf::Uint8> * RayCast::shade(std::vector<Light*> &lightList) {
-
-  // return pointer to buffer
+std::vector<sf::Uint8>* RayCast::shade(std::vector<Light*> &lightList) {
 
   int totalColor = 0;
   
@@ -129,13 +124,11 @@ std::vector<sf::Uint8> * RayCast::shade(std::vector<Light*> &lightList) {
       colorBuffer->push_back(col.b);
       colorBuffer->push_back(col.a);
       
-      //EC
-      totalColor++;
+      totalColor++; // EC
     }
   }
 
-  //EC
-  std::cout << "Caster shaded " << totalColor << " non-default colors to buffer\n";
+  std::cout << "Caster shaded " << totalColor << " non-default colors to buffer\n"; // EC
   
   return colorBuffer;
 }

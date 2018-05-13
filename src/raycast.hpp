@@ -55,7 +55,7 @@ public:
    *   [average the RGB data by rays per pixel]
    *   "as3.pdf" 1.Raytracing -Anti-aliasing
    */
-  std::vector<sf::Uint8> * shade(std::vector<Light*> &lightList); 
+  std::vector<sf::Uint8>* shade(std::vector<Light*> &lightList); 
 };
 
 #endif
