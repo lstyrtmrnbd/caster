@@ -29,12 +29,15 @@ IntersectionRecord* Triangle::intersect(Ray& ray) {
 
   double test1 = Vec3dMath::dot(rayPointVec, cross); //u
 
+  // rather than multiplying u and v by inverse determinate and testing against 1.0,
+  // just test against determinate
   if(test1 < 0.0 || test1 > det) return nullptr;
 
   sf::Vector3<double> cross2 = Vec3dMath::cross(rayPointVec, vecAB); //q
 
   double test2 = Vec3dMath::dot(direction, cross2); //v
 
+  // same here
   if(test2 < 0.0 || test1 + test2 > det) return nullptr;
 
   double distance = Vec3dMath::dot(vecAC, cross2);
