@@ -10,7 +10,7 @@ class Triangle : public Surface {
 
 public:
 
-  sf::Vector3<double> p1, p2, p3;
+  sf::Vector3<double> p1, p2, p3, normal;
 
   Triangle(sf::Vector3<double> point1, sf::Vector3<double> point2, sf::Vector3<double> point3);
 
