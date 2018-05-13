@@ -37,7 +37,7 @@ IntersectionRecord* Triangle::intersect(Ray& ray) {
 
   if(test2 < 0.0 || test1 + test2 > det) return nullptr;
 
-  sf::Vector3<double> distance = Vec3dMath::dot(vecAC, cross2);
+  double distance = Vec3dMath::dot(vecAC, cross2);
   distance *= inverseDet;
 
   sf::Vector3<double> interPt = ray.origin + distance * ray.direction;

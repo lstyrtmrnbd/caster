@@ -15,6 +15,6 @@ public:
   Triangle(sf::Vector3<double> point1, sf::Vector3<double> point2, sf::Vector3<double> point3);
 
   IntersectionRecord* intersect(Ray&);
-}
+};
 
 #endif // TRIANGLE_HPP
